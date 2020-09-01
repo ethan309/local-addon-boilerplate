@@ -3,8 +3,8 @@ import fs from 'fs-extra';
 import path from 'path';
 
 const packageJSON = fs.readJsonSync(path.join(__dirname, '../package.json'));
-const addonName = packageJSON['productName'];
-const addonID = packageJSON['slug'];
+const addonName = packageJSON.productName;
+const addonID = packageJSON.slug;
 
 export default function (context) {
 	const { React, hooks } = context;
@@ -16,7 +16,7 @@ export default function (context) {
 
 
 	// Add menu option within the site menu bar
-	hooks.addFilter('siteInfoMoreMenu', function (menu, site) {
+	hooks.addFilter('siteInfoMoreMenu', (menu, site) => {
 		menu.push({
 			label: `${addonName}`,
 			enabled: true,

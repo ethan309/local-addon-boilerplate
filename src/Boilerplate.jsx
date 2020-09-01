@@ -8,7 +8,7 @@ import * as LocalRenderer from '@getflywheel/local/renderer';
 import { Button, FlyModal, Title, Text } from '@getflywheel/local-components';
 
 export default class Boilerplate extends Component {
-	constructor(props) {
+	constructor (props) {
 		super(props);
 
 		this.state = {
@@ -24,7 +24,7 @@ export default class Boilerplate extends Component {
 		this.saveCount = this.saveCount.bind(this);
 	}
 
-	componentDidMount() {
+	componentDidMount () {
 		ipcRenderer.once('instructions', (event) => {
 			this.setState({
 				showInstructions: true,
@@ -32,22 +32,22 @@ export default class Boilerplate extends Component {
 		});
 	}
 
-	componentWillUnmount() {
+	componentWillUnmount () {
 		ipcRenderer.removeAllListeners('instructions');
 	}
 
-	fetchCount() {
-		const site = this.props.sites[this.props.match.params.siteID],
+	fetchCount () {
+		const site = this.props.sites[this.props.match.params.siteID];
 		return site.count ?? 0;
 	}
 
-	hideInstructions() {
+	hideInstructions () {
 		this.setState({
 			showInstructions: false,
 		});
 	}
 
-	saveCount() {
+	saveCount () {
 		ipcRenderer.send(
 			'save-count',
 			this.state.siteId,
@@ -55,32 +55,32 @@ export default class Boilerplate extends Component {
 		);
 	}
 
-	increaseCount() {
+	increaseCount () {
 		const oldCount = this.state.count;
 		this.setState({
 			count: oldCount + 1,
 		});
 	}
 
-	decreaseCount() {
+	decreaseCount () {
 		const oldCount = this.state.count;
 		this.setState({
 			count: oldCount - 1,
 		});
 	}
 
-	async randomlySetCount() {
+	async randomlySetCount () {
 		const newCount = await LocalRenderer.ipcAsync('get-random-count');
 		this.setState({
 			count: newCount,
 		});
 	}
 
-	renderCount() {
+	renderCount () {
 		return <p>Count: {this.state.count}</p>;
 	}
 
-	renderInstructions() {
+	renderInstructions () {
 		return (
 			<FlyModal
 				isOpen={this.state.showInstructions}
@@ -102,10 +102,10 @@ export default class Boilerplate extends Component {
 					</Text>
 				</div>
 			</FlyModal>
-		)
+		);
 	}
 
-    render() {
+    render () {
         return (
             <div style={{ flex: '1', overflowY: 'auto', margin: '10px' }}>
                 <h2>Hello, World!</h2>
@@ -118,7 +118,7 @@ export default class Boilerplate extends Component {
 					<Button onClick={this.saveCount}>Save Count</Button>
 				</div>
             </div>
-        )
+        );
     }
 
 }
